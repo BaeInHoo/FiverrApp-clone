@@ -19,6 +19,12 @@ const Navbar = () => {
     }
   },{});
 
+  const currentUser = {
+    id: 1,
+    username: "John Doe",
+    isSeller: true
+  }
+
   return (
     <div className={active ? "navbar active" : "navbar"}>
       <div className="container">
