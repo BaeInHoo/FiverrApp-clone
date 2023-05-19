@@ -42,7 +42,7 @@ function App() {
           path: "/orders",
           element: <Orders />
         },{
-          path: "/myGigs",
+          path: "/mygigs",
           element: <MyGigs />
         },{
           path: "/add",
