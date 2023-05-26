@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import "./GigCard.scss"
-import { AiFillStar } from "react-icons/ai"
+import { AiFillStar, AiFillHeart } from "react-icons/ai"
 
 const GigCard = ({ item }) => {
   return (
@@ -19,7 +19,14 @@ const GigCard = ({ item }) => {
             <span>{item.star}</span>
           </div>
         </div>
-        <div className="detail"></div>
+        <hr />
+        <div className="details">
+          <AiFillHeart className="icons"/>
+          <div className="price">
+            <span>STARTING AT</span>
+            <h2>${item.price}</h2>
+          </div>
+        </div>
       </div>
     </Link>
   )
