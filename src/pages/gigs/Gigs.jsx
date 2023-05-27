@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import "./Gigs.scss"
+import { gigs } from "../../data"
+import GigCard from "../../components/gigCard/GigCard"
 import { AiFillCaretDown } from "react-icons/ai"
 
 const Gigs = () => {
@@ -32,11 +34,19 @@ const Gigs = () => {
             <AiFillCaretDown className="icons" onClick={()=>setOpen(!open)}/>
             {open && (
               <div className="right-menu">
-                <span onClick={()=>reSort("createdAt")}>Newest</span>
-                <span onClick={()=>reSort("sales")}>Best Selling</span>
+                {sort === "sales" ? (
+                  <span onClick={()=>reSort("createdAt")}>Newest</span>
+                ) : (
+                  <span onClick={()=>reSort("sales")}>Best Selling</span>
+                )}
               </div>
             )}
           </div>
+        </div>
+        <div className="cards">
+          {gigs.map(gig => (
+            <GigCard key={gig.id} item={gig}/>
+          ))}
         </div>
       </div>
     </div>
