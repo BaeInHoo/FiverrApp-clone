@@ -11,7 +11,7 @@ const Gig = () => {
           <span className="breadcrumbs">FIVERR > GRAPHICS & DESIGN ></span>
           <h1>I will create ai generated art for you</h1>
           <div className="user">
-            <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+            <img className='g-img' src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
             <span>John Doe</span>
             <div className="stars">
               <AiFillStar className="icons"/>
@@ -22,7 +22,7 @@ const Gig = () => {
               <span>5</span>
             </div>
           </div>
-          <Slide slidesToShow={1} arrowsScroll={1}>
+          <Slide className="slide" slidesToShow={1} arrowsScroll={1}>
             <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
             <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
             <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
@@ -95,7 +95,7 @@ const Gig = () => {
             <h2>Reviews</h2>
             <div className="item">
               <div className="user">
-                <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+                <img className="g-img" src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
                 <div className="info">
                   <span>John Doe</span>
                   <div className="country">
@@ -129,7 +129,7 @@ const Gig = () => {
             <hr />
             <div className="item">
               <div className="user">
-                <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+                <img className="g-img" src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
                 <div className="info">
                   <span>John Doe</span>
                   <div className="country">
@@ -163,7 +163,7 @@ const Gig = () => {
             <hr />
             <div className="item">
               <div className="user">
-                <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+                <img className="g-img" src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
                 <div className="info">
                   <span>John Doe</span>
                   <div className="country">
