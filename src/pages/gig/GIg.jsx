@@ -1,6 +1,13 @@
 import React from 'react'
 import "./Gig.scss";
-import { AiFillStar, AiFillLike, AiFillDislike } from "react-icons/ai"
+import { 
+  AiFillStar, 
+  AiFillLike, 
+  AiFillDislike, 
+  AiOutlineClockCircle 
+} from "react-icons/ai";
+import { GrPowerCycle } from "react-icons/gr"; 
+import { BsCheckAll } from "react-icons/bs";
 import Slide from '../../components/slide/Slide';
 
 const Gig = () => {
@@ -196,7 +203,45 @@ const Gig = () => {
             </div>
           </div>
         </div>
-        <div className="right"></div>
+        <div className="right">
+          <div className="price">
+            <h3>1 AI generated image</h3>
+            <h3>$ 59.99</h3>
+          </div>
+          <p>
+            I will create a unique high quality AI generated image based on a
+            description that you give me
+          </p>
+          <div className="details">
+            <div className="item">
+              <AiOutlineClockCircle className='icons'/>
+              <span>2 days Delivery</span>
+            </div>
+            <div className="item">
+              <GrPowerCycle className='icons'/>
+              <span>3 Revisions</span>
+            </div>
+          </div>
+          <div className="features">
+            <div className="item">
+              <BsCheckAll className='icons'/>
+              <span>Prompt writing</span>
+            </div>
+            <div className="item">
+              <BsCheckAll className='icons'/>
+              <span>Prompt writing</span>
+            </div>
+            <div className="item">
+              <BsCheckAll className='icons'/>
+              <span>Prompt writing</span>
+            </div>
+            <div className="item">
+              <BsCheckAll className='icons'/>
+              <span>Prompt writing</span>
+            </div>
+          </div>
+          <button>Continue</button>
+        </div>
       </div>
     </div>
   )
