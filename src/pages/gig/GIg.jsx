@@ -8,7 +8,7 @@ import {
 } from "react-icons/ai";
 import { GrPowerCycle } from "react-icons/gr"; 
 import { BsCheckAll } from "react-icons/bs";
-import Slide from '../../components/slide/Slide';
+import Slider from 'infinite-react-carousel';
 
 const Gig = () => {
   return (
@@ -29,11 +29,11 @@ const Gig = () => {
               <span>5</span>
             </div>
           </div>
-          <Slide className="slide" slidesToShow={1} arrowsScroll={1}>
+          <Slider className="slide" slidesToShow={1} arrowsScroll={1}>
             <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
             <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
             <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-          </Slide>
+          </Slider>
           <h2>About This Gig</h2>
           <p>
             I use an AI program to create images based on text prompts. This
