@@ -28,10 +28,12 @@ export const login = async (req, res) => {
     const token = jwt.sign({
       id: user._id,
       isSeller: user.isSeller,
-    });
+    }, process.env.JWT_KEY);
 
     const {password, ...info} = user._doc
-    res.status(200).send(user)
+    res.cookie("accessToken", token, {
+      httpOnly: true,
+    }).status(200).send(user)
 
   } catch (error) {
     res.status(500).send("잘못된 정보 입니다")
