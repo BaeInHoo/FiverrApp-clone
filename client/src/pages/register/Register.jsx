@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react';
+import upload from '../../utils/upload';
+import newRequest from '../../utils/newRequest';
 import "./Register.scss"
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
 
@@ -16,6 +19,8 @@ const Register = () => {
     desc: "",
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setUser(prev => {
       return { ...prev, [e.target.name]: e.target.value };
@@ -28,9 +33,20 @@ const Register = () => {
     });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const url = await upload(file)
+    try {
+      await newRequest.post("/auth/register", { ...user, img: url });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div className="register">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="left">
           <h1>Create a new account</h1>
           <label htmlFor="">Username</label>
