@@ -1,8 +1,11 @@
 import express from 'express';
-import { deleteUser } from '../controller/user.controller.js';
+import { createGig, deleteGig, getGig, getGigs } from '../controller/gig.controller';
 
 const router = express.Router();
 
-router.get("/test", deleteUser)
+router.post("/", verifyToken, createGig);
+router.delete("/:id", verifyToken, deleteGig);
+router.get("/single/:id", verifyToken, getGig);
+router.get("/", verifyToken, getGigs);
 
 export default router;
