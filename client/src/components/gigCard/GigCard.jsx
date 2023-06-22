@@ -19,7 +19,7 @@ const GigCard = ({ item }) => {
   });
 
   return (
-    <Link to="/gig/123" className="link">
+    <Link to={`gigs/${item._id}`} className="link">
       <div className="gig-card">
         <img src={item.img} alt="" />
         <div className="info">

@@ -9,52 +9,76 @@ import {
 import { GrPowerCycle } from "react-icons/gr"; 
 import { BsCheckAll } from "react-icons/bs";
 import Slider from 'infinite-react-carousel';
+import { useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import newRequest from '../../utils/newRequest';
 
 const Gig = () => {
+  const { id } = useParams();
+
+  const { isLoading, error, data, refetch } = useQuery({
+    queryKey: ["gig"],
+    queryFn: () =>
+      newRequest
+        .get(
+          `/gigs/single/${id}`
+        )
+        .then((res) => {
+          return res.data;
+        }),
+  });
+
+  const { isLoading: isLoadingUser, error: errorUser, data: dataUser } = useQuery({
+    queryKey: ["gig"],
+    queryFn: () =>
+      newRequest
+        .get(
+          `/users/${data.userId}`
+        )
+        .then((res) => {
+          return res.data;
+        }),
+  });
+  
   return (
     <div className="gig">
-      <div className="container">
+      {isLoading ? (
+        "loading"
+        ) : error ? (
+          "잘못된 접근입니다"
+        ) : (
+        <div className="container">
         <div className="left">
-          <span className="breadcrumbs">FIVERR > GRAPHICS & DESIGN ></span>
-          <h1>I will create ai generated art for you</h1>
-          <div className="user">
+          <span className="breadcrumbs">FIVERR {">"} GRAPHICS & DESIGN {">"}</span>
+          <h1>{data.title}</h1>
+          {isLoadingUser ? "loading" : errorUser ? "잘못된 접근 입니다" :<div className="user">
             <img className='g-img' src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
             <span>John Doe</span>
-            <div className="stars">
-              <AiFillStar className="icons"/>
-              <AiFillStar className="icons"/>
-              <AiFillStar className="icons"/>
-              <AiFillStar className="icons"/>
-              <AiFillStar className="icons"/>
-              <span>5</span>
-            </div>
-          </div>
+            {/* 별 개수 만큼 별 표시 */}
+            {!isNaN(data.totalStars / data.starNumber) && (
+              <div className="stars">
+                {Array(Math.round(data.totalStars / data.starNumber)).fill().map((item, i) => (
+                  <AiFillStar className="icons" key={i}/>
+                ))}
+                <span>
+                  {Math.round(data.totalStars / data.starNumber)}
+                </span>
+              </div>
+            )}
+          </div>}
           <Slider className="slide" slidesToShow={1} arrowsScroll={1}>
-            <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-            <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-            <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+            {data.images.map((img) => (
+              <img key={img} src={img} alt=''/>
+            ))}
           </Slider>
           <h2>About This Gig</h2>
-          <p>
-            I use an AI program to create images based on text prompts. This
-            means I can help you to create a vision you have through a textual
-            description of your scene without requiring any reference images.
-            Some things I've found it often excels at are: Character portraits
-            (E.g. a picture to go with your DnB character) Landscapes (E.g.
-            wallpapers, illustrations to compliment a story) Logos (E.g. Esports
-            team, business, profile picture) You can be as vague or as
-            descriptive as you want. Being more vague will allow the AI to be
-            more creative which can sometimes result in some amazing images. You
-            want in mind. All of the images I create are original and will be
-            found nowhere eles. If you have any questions you're more than
-            welcome to send me a message.
-          </p>
-          <div className="seller">
+          <p>{data.desc}</p>
+          {isLoadingUser ? "loading" : errorUser ? "잘못된 접근 입니다" : <div className="seller">
             <h2>About The Seller</h2>
             <div className="user">
-              <img src="https://images.pexels.com/photos/16450166/pexels-photo-16450166.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+              <img src={dataUser.img || "/img/noavatar.jpg"} alt="" />
               <div className="info">
-                <span>John Doe</span>
+                <span>{dataUser.username}</span>
                 <div className="stars">
                   <AiFillStar className="icons"/>
                   <AiFillStar className="icons"/>
@@ -70,7 +94,7 @@ const Gig = () => {
               <div className="items">
                 <div className="item">
                   <span className="title">From</span>
-                  <div className="desc">USA</div>
+                  <div className="desc">{dataUser.country}</div>
                 </div>
                 <div className="item">
                   <span className="title">Member since</span>
@@ -90,14 +114,10 @@ const Gig = () => {
                 </div>
               </div>
               <hr />
-              <p>
-                My name is Ciaran. I enjoy creating AI generated art in my spare
-                time. I have a lot of experience using the AI program and that 
-                means I know what to prompt the AI with to get a great and
-                incredibly detailed result. 
-              </p>
+              <p>{dataUser.desc}</p>
             </div>
           </div>
+          }
           <div className="reviews">
             <h2>Reviews</h2>
             <div className="item">
@@ -205,44 +225,31 @@ const Gig = () => {
         </div>
         <div className="right">
           <div className="price">
-            <h3>1 AI generated image</h3>
-            <h3>$ 59.99</h3>
+            <h3>{data.shortTitle}</h3>
+            <h3>$ {data.price}</h3>
           </div>
-          <p>
-            I will create a unique high quality AI generated image based on a
-            description that you give me
-          </p>
+          <p>{data.shortDesc}</p>
           <div className="details">
             <div className="item">
               <AiOutlineClockCircle className='icons'/>
-              <span>2 days Delivery</span>
+              <span>{data.deliveryDate} days Delivery</span>
             </div>
             <div className="item">
               <GrPowerCycle className='icons'/>
-              <span>3 Revisions</span>
+              <span>{data.revisionNumber} Revisions</span>
             </div>
           </div>
           <div className="features">
-            <div className="item">
-              <BsCheckAll className='icons'/>
-              <span>Prompt writing</span>
-            </div>
-            <div className="item">
-              <BsCheckAll className='icons'/>
-              <span>Prompt writing</span>
-            </div>
-            <div className="item">
-              <BsCheckAll className='icons'/>
-              <span>Prompt writing</span>
-            </div>
-            <div className="item">
-              <BsCheckAll className='icons'/>
-              <span>Prompt writing</span>
-            </div>
+            {data.features.map((feature) => (
+              <div className="item" key={feature}>
+                <BsCheckAll className='icons'/>
+                <span>{feature}</span>
+              </div>
+            ))}
           </div>
           <button>Continue</button>
         </div>
-      </div>
+      </div>)}
     </div>
   )
 }
